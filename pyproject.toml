@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "print_btree"
-version = "0.0.5"
+version = "0.0.6"
 authors = [
   { name="Liu Zuo Lin", email="zlliu246@gmail.com" },
 ]
