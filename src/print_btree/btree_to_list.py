@@ -1,6 +1,6 @@
 from collections import deque
 
-def get_height(root):
+def get_height(root) -> int:
     """
     given root of btree, find height of tree
     """

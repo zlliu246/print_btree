@@ -1,6 +1,10 @@
-def rid_pipes(top, bottom):
+def rid_pipes(
+    top: str, 
+    bottom: str
+) -> str:
     """
     removes unneccesary pipes
+        - change bottom according to top
 
     inputs:
         '|  |  |  |  |  |  |  |'    # bottom
@@ -15,9 +19,13 @@ def rid_pipes(top, bottom):
         else: out += b
     return out
 
-def rid_underscores(top, bottom):
+def rid_underscores(
+    top: str,
+    bottom: str
+) -> str:
     """
     removes unnecessary underscores
+        - change bottom according to top
 
     inputs:
         ' _4__  _ __  _6__  _7__'   # bottom
@@ -44,15 +52,12 @@ def rid_underscores(top, bottom):
             l = r = -1
     return out
 
-b = '_4__  _ __  _6__  _7__'   # bottom
-t = '   |           |     |'   # top
-
-# print(rid_underscores(t, b))
-
-
-def remove_front_spaces(rows: list[str]) -> list[str]:
+def remove_front_spaces(
+    rows: list[str]
+) -> list[str]:
     """
     remove common whitespace at the front
+
     input:
         [
             '     aa',
@@ -77,8 +82,12 @@ def remove_front_spaces(rows: list[str]) -> list[str]:
     return rows
 
 
-
-def audit(rows: list[str]):
+def audit(
+    rows: list[str]
+) -> list[str]:
+    """
+    removes empty nodes + tidies up strings
+    """
     rows[0] = rows[0].replace('?', ' ')
     for i in range(len(rows)-1):
         # change bottom based on top

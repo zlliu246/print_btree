@@ -28,9 +28,15 @@ def print_btree(
             use print_btree(root, val='v', left='l', right='r')
 
     """
-    root = cast(root, val=val, left=left, right=right)
+    root = cast(root, 
+                val=val,
+                left=left,
+                right=right)
+    
     ls = btree_to_list(root)
+
     rows = display_btree(ls)
+    
     rows = audit(rows)
 
     print();[print(row) for row in rows[::-1]];print()

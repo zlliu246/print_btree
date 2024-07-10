@@ -1,4 +1,7 @@
 class BTreeSpacingException(Exception):
+    """
+    to be thrown if not enough spacing when printing btree
+    """
     pass
 
 def get_pipes(string: str) -> str:
