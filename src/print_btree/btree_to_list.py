@@ -14,7 +14,7 @@ def get_height(root):
         if current.right: queue.append((current.right, lvl+1))
     return largest
 
-def btree_to_list(root):
+def btree_to_list(root) -> list[list]:
     """
     generates 2d list representing btree
         eg. [[1], [2,3], [4,5,6,7]]

@@ -1,3 +1,6 @@
+class BTreeSpacingException(Exception):
+    pass
+
 def get_pipes(string: str) -> str:
     '''
     given a row, get pipes at correct positions
@@ -22,8 +25,7 @@ def get_pipes(string: str) -> str:
 
 def get_row(
     string: str, 
-    ls: list,
-    none_val = '?'
+    ls: list
 ) -> str:
     '''
     inputs:
@@ -45,38 +47,56 @@ def get_row(
         l = indexes[i]
         r = indexes[i+1]
         if i % 2 == 0:
-            out += str(ls[ls_i] or none_val).center(r-l+1, '_')
+            val = str(ls[ls_i] or '?').center(r-l+1, '_')
+
+            if val[0] != '_' or val[-1] != '_':
+                raise BTreeSpacingException()
+
+            out += val
             ls_i += 1
         else:
             out += ' ' * (r-l-1)
     return out
 
 
-def display(
+def display_btree_attempt(
     ls: list[list],
-    none_val: str = '?'
+    num_spaces
 ) -> None:
     """
     inputs:
         ls: 2d list representing btree eg [[1], [2,3], [4,5,6,7]]
-        none_val: character we print if a value is None
+        num_spaces: num spaces between values in bottom of tree
     """
     ls = ls[::-1]
-    def get_base(base):
+    def get_base(base, num_spaces):
         out = ''
         for i,val in enumerate(base):
-            out += str(val or none_val) + '  '
+            out += str(val or '?') + ' '*num_spaces
         return out.strip()
 
-    out = [get_base(ls[0])]
+    out = [get_base(ls[0], num_spaces=num_spaces)]
     for row in ls[1:]:
         pipes = get_pipes(out[-1])
         out.append(pipes)
 
-        row = get_row(out[-1], row, none_val=none_val)
+        row = get_row(out[-1], row)
         out.append(row)
 
-    print()
-    for row in out[::-1]:
-        print(row)
-    print()
+    return out
+
+
+def display_btree(ls: list[list]) -> None:
+    """
+    keep trying to display btree until BTreeSpacingException is not raised
+
+    inputs:
+        ls: 2d list representing btree eg [[1], [2,3], [4,5,6,7]]
+    """
+    num_spaces = 1
+    while True:
+        try:
+            return display_btree_attempt(ls, num_spaces)
+        except BTreeSpacingException as e:
+            num_spaces += 1
+        
