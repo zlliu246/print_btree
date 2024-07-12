@@ -52,34 +52,33 @@ def rid_underscores(
             l = r = -1
     return out
 
-def remove_front_spaces(
+def remove_redundant_chars(
     rows: list[str]
 ) -> list[str]:
     """
-    remove common whitespace at the front
-
-    input:
-        [
-            '     aa',
-            '       aa',
-            '      aa',
-        ]
-    
-    output:
-        [
-            'aa',
-            '  aa',
-            ' aa',
-        ]
+    removes redundant undescores in middle of binary tree
+    to prevent tree from being too wide
     """
-    smallest = float('inf')
-    for row in rows:
-        num_spaces = len(row) - len(row.lstrip())
-        if num_spaces < smallest:
-            smallest = num_spaces
-    for i, row in enumerate(rows):
-        rows[i] = row[smallest:]
-    return rows
+    def keep(column: list[str]):
+        for trigram in column:
+            if trigram not in ('___', '   '):
+                return True
+        return False
+        
+    out = ['' for r in rows]
+    index = 0
+    max_len = len(max(rows, key=len))
+    for i in range(len(rows)):
+        rows[i] = ' ' + rows[i].ljust(max_len, ' ') + ' '
+
+    for index in range(1, max_len+1):
+        column = [row[index-1:index+2] for row in rows]
+
+        if keep(column):
+            for i in range(len(out)):
+                out[i] += column[i][1]
+    # return rows
+    return out
 
 
 def audit(
@@ -102,5 +101,5 @@ def audit(
             # bottom contains pipes, top contains values:=
             rows[i+1] = rid_pipes(top, bottom)
 
-    rows = remove_front_spaces(rows)
+    rows = remove_redundant_chars(rows)
     return rows

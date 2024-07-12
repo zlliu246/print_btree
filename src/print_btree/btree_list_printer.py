@@ -62,10 +62,10 @@ def get_row(
     return out
 
 
-def display_btree_attempt(
+def generate_display_strings_attempt(
     ls: list[list],
     num_spaces
-) -> None:
+) -> list[str]:
     """
     inputs:
         ls: 2d list representing btree eg [[1], [2,3], [4,5,6,7]]
@@ -89,7 +89,7 @@ def display_btree_attempt(
     return out
 
 
-def display_btree(ls: list[list]) -> None:
+def generate_display_strings(ls: list[list]) -> list[str]:
     """
     keep trying to display btree until BTreeSpacingException is not raised
 
@@ -99,7 +99,7 @@ def display_btree(ls: list[list]) -> None:
     num_spaces = 1
     while True:
         try:
-            return display_btree_attempt(ls, num_spaces)
+            return generate_display_strings_attempt(ls, num_spaces)
         except BTreeSpacingException as e:
-            num_spaces += 1
+            num_spaces *= 2
         

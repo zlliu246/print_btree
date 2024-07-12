@@ -1,5 +1,5 @@
 from .btree_to_list import btree_to_list
-from .btree_list_printer import display_btree
+from .btree_list_printer import generate_display_strings
 from .btree_caster import cast
 from .btree_audit import audit
 
@@ -35,7 +35,7 @@ def print_btree(
     
     ls = btree_to_list(root)
 
-    rows = display_btree(ls)
+    rows = generate_display_strings(ls)
     
     rows = audit(rows)
 
