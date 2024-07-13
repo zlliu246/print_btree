@@ -58,11 +58,32 @@ def remove_redundant_chars(
     """
     removes redundant undescores in middle of binary tree
     to prevent tree from being too wide
+
+    
+                          __________________________________1__________________________________                             
+                          |                                                                   |                             
+         _________________2_________________                                                  3__________________           
+         |                                 |                                                                    |           
+         4                             pineapple                                                         appleorangepear__  
+                                                                                                                         |  
+                                                                                                                        100 
+
+        # becomes
+
+            ______________1___                    
+            |                |                    
+        ___2_______         3__________          
+        |         |                   |          
+        4     pineapple        appleorangepear__ 
+                                                | 
+                                            100
+
     """
     def keep(column: list[str]):
         for trigram in column:
             if trigram not in ('___', '   '):
                 return True
+            
         return False
         
     out = ['' for r in rows]
