@@ -1,29 +1,16 @@
 from src.print_btree import print_btree
-from src.print_btree.utils import BTree
 
-
-
-class N:
-    def __init__(self, val):
-        self.val = val
+class Node:
+    def __init__(self, value):
+        self.value = value
         self.l = self.r = None
 
-def show(root): print_btree(root, left='l', right='r')
+root = Node(1)
+root.l = Node('apple')
+root.r = Node('orange')
+root.l.l = Node(3)
+root.l.r = Node(4)
+root.r.r = Node('pineapple')
+root.r.r.l = Node(1000000)
 
-# root = N(1)
-# root.l = N(2)
-# root.r = N(3)
-# root.l.l = N(4)
-# root.l.l.r = N(5)
-# root.l.l.r.l = N(6)
-# show(root)
-
-root = N(1)
-root.l = N(2)
-root.r = N(3)
-root.l.l = N(4)
-root.l.r = N('pineapple')
-root.r.r = N('appleorangepear')
-root.r.r.r = N(100)
-show(root)
-
+print_btree(root, val='value', left='l', right='r')
