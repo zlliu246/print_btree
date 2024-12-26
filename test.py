@@ -6,14 +6,11 @@ class Node:
         self.left = None
         self.right = None
 
-root = Node("apple")
-root.left = Node("orange")
-root.right = Node("pear")
-root.left.left = Node("pineapple")
-# root.left.right = Node("durian")
-# root.left.right.left = Node("durian tree apple orange pear")
-# root.left.right.left.right = Node("durian")
-# # root.right.left = Node("kiwi")
-# root.right.right = Node("avocado")
+root = Node('apple')
+root.left = Node('pie')
+root.right = Node('juice')
+root.left.left = Node('pear')
+root.left.right = Node('pineapplejuice')
+root.right.right = Node('durian')
 
 print_btree(root)

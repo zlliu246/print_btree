@@ -49,7 +49,7 @@ def print_btree(
         underscore_line: str = get_underscore_line(parent_node_level, pipe_line)
         lines_to_print.append(underscore_line)
 
-    # lines_to_print: list[str] = remove_unnecessary_underscores(lines_to_print)
+    lines_to_print: list[str] = remove_unnecessary_underscores(lines_to_print)
 
     str_to_print = dedent("\n".join(lines_to_print))
 
