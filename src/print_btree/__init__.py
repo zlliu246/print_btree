@@ -14,7 +14,6 @@ from .helpers.string_helper import (
 )
 from .helpers.classes import Node
 
-
 def print_btree(
     node: Any,
     val: str = "val",
@@ -22,6 +21,14 @@ def print_btree(
     right: str = "right",
     display: bool = True,
 ) -> str:
+    """
+    Args:
+        node (Any): your own node object
+        val (str): name of value in your node object. defaults to "val"
+        left (str): name of left child in your node object. defaults to "left"
+        right (str): name of right child in your node object. defaults to "right"
+        display (bool): if true, print the binary tree representation. 
+    """
     
     node: Node = cast_to_standard_node(node, val, left, right)
 
@@ -42,7 +49,7 @@ def print_btree(
         underscore_line: str = get_underscore_line(parent_node_level, pipe_line)
         lines_to_print.append(underscore_line)
 
-    lines_to_print: list[str] = remove_unnecessary_underscores(lines_to_print)
+    # lines_to_print: list[str] = remove_unnecessary_underscores(lines_to_print)
 
     str_to_print = dedent("\n".join(lines_to_print))
 

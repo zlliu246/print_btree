@@ -6,6 +6,13 @@ import re
 from .classes import Node
 
 def get_underscore_str(node: Node) -> str:
+    """
+    Gets individual underscore component for node based on wideness score
+
+    if node has 2 children, eg. "_____value_____"
+    if node has 1 child, eg. "     value_____" or "_____value     "
+    if node has 0 children, eg. "     value     "
+    """
     num_chars: int = node.wideness_score // 2
     spaces: str = " " * num_chars
     underscores: str = "_" * num_chars
@@ -19,6 +26,9 @@ def get_underscore_str(node: Node) -> str:
     return str(node.val)
 
 def get_underscore_line_for_root_node(node: Node) -> str:
+    """
+    Gets underscore line for root node with lots of padding (remove later)
+    """
     padding: str = " " * node.wideness_score
     return padding + get_underscore_str(node)
 
@@ -26,6 +36,9 @@ def get_underscore_line(
     parent_node_level: list[Node],
     previous_pipe_line: str
 ) -> str:
+    """
+    Gets underscore lines for child nodes, based on a list of parent nodes
+    """
     chars = [" "] * len(previous_pipe_line) * 3
     prev_pipe_line_index: int = previous_pipe_line.find("|")
 
@@ -43,6 +56,12 @@ def get_underscore_line(
     return "".join(chars).rstrip()
 
 def get_pipe_line(previous_underscore_line: str) -> str:
+    """
+    Gets pipe line based on previous underscore line
+
+    Given   "    ___apple___     ___orange___"
+    return  "    |         |     |          |"
+    """
     chars: list[str] = [" "] * len(previous_underscore_line)
     for match in re.finditer(r"\b_|_\b", previous_underscore_line):
         index: int = match.span()[0]
@@ -50,6 +69,21 @@ def get_pipe_line(previous_underscore_line: str) -> str:
     return "".join(chars)
 
 def remove_unnecessary_underscores(lines_to_print: list[str]) -> list[str]:
+    """
+                ____________apple____________
+                |                           |
+        _______orange                       pear
+        |                                       
+    pineapple
+
+    To:
+                _____apple_____
+                |             |
+        _______orange         pear
+        |                         
+    pineapple
+    
+    """
     indexes_to_remove: set[int] = set()
 
     max_index: int = max(len(line) for line in lines_to_print)

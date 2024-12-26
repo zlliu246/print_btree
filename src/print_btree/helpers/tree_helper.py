@@ -15,6 +15,27 @@ def cast_to_standard_node(
 ) -> Node:
     """
     Converts nonstandard_node root to standard Node
+
+    Args:
+        node (Any): your own node object
+        val (str): name of value in your node object. defaults to "val"
+        left (str): name of left child in your node object. defaults to "left"
+        right (str): name of right child in your node object. defaults to "right"
+    Returns:
+        copy of binary tree, but using standard Node objects
+        
+    Eg. let's say you use your own custom node
+
+        class YourNode:
+            def __init__(self, value):
+                self.value = value
+                self.left_child = None
+                self.right_child = None
+
+    Using this function:
+
+        cast_to_standard_node(yournode, "value", "left_child", "right_child")
+
     """
     standard_node = Node(getattr(nonstandard_node, val))
 
@@ -52,6 +73,23 @@ def assign_wideness_scores(node: Node) -> None:
     )
 
 def get_node_levels(node: Node) -> list[list[Node]]:
+    """
+    Gets list of nodes for each level
+
+                _____apple_____
+                |             |
+        _______orange         pear
+        |                         
+    pineapple
+
+    becomes
+
+    [
+        [Node("apple")],
+        [Node("orange"), Node("pear")],
+        [Node("pineapple")]
+    ]
+    """
     
     node_levels: list[list[Node]] = []
 
