@@ -62,11 +62,18 @@ def get_pipe_line(previous_underscore_line: str) -> str:
     Given   "    ___apple___     ___orange___"
     return  "    |         |     |          |"
     """
+    previous_underscore_line = " " + previous_underscore_line + " "
     chars: list[str] = [" "] * len(previous_underscore_line)
-    for match in re.finditer(r"\b_|_\b", previous_underscore_line):
-        index: int = match.span()[0]
-        chars[index] = "|"
-    return "".join(chars)
+    for index in range(1, len(previous_underscore_line)-1):
+        char: str = previous_underscore_line[index]
+        prev_char: str = previous_underscore_line[index-1]
+        next_char: str = previous_underscore_line[index+1]
+        if char == "_":
+            if prev_char == " ":
+                chars[index] = "|"
+            elif next_char == " ":
+                chars[index] = "|"
+    return "".join(chars)[1:-1]
 
 def remove_unnecessary_underscores(lines_to_print: list[str]) -> list[str]:
     """

@@ -19,7 +19,7 @@ def print_btree(
     val: str = "val",
     left: str = "left",
     right: str = "right",
-    display: bool = True,
+    print_only: bool = True,
 ) -> str:
     """
     Args:
@@ -27,7 +27,7 @@ def print_btree(
         val (str): name of value in your node object. defaults to "val"
         left (str): name of left child in your node object. defaults to "left"
         right (str): name of right child in your node object. defaults to "right"
-        display (bool): if true, print the binary tree representation. 
+        print_only (bool): if true, print the binary tree representation and don't return. Else, don't print, but return 
     """
     
     node: Node = cast_to_standard_node(node, val, left, right)
@@ -53,9 +53,10 @@ def print_btree(
 
     str_to_print = dedent("\n".join(lines_to_print))
 
-    if display:
+    if print_only:
         print(str_to_print)
-    return str_to_print
+    else:
+        return str_to_print
 
 
 __all__ = ['print_btree']

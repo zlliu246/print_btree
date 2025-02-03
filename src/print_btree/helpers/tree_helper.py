@@ -37,7 +37,7 @@ def cast_to_standard_node(
         cast_to_standard_node(yournode, "value", "left_child", "right_child")
 
     """
-    standard_node = Node(getattr(nonstandard_node, val))
+    standard_node = Node(getattr(nonstandard_node, str(val)))
 
     if getattr(nonstandard_node, left):
         left_child = cast_to_standard_node(
